@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Fraunces } from "next/font/google";
 import "./globals.css";
+import Navigation from "../components/Navigation";
 
 const fraunces = Fraunces({
   variable: "--font-fraunces",
@@ -20,6 +21,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${fraunces.variable} antialiased`}>
+        <Navigation />
         {children}
       </body>
     </html>

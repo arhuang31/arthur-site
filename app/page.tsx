@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 import Highlight from "../components/Highlight";
 
-const TYPING_SPEED_MS = 40;
+const TYPING_SPEED_MS = 60;
 
 function useTyping(totalChars: number, speedMs: number) {
   const [count, setCount] = useState(0);
@@ -24,6 +24,40 @@ function useTyping(totalChars: number, speedMs: number) {
   return count;
 }
 
+function useTypingText(text: string, startDelay: number, speedMs: number) {
+  const [count, setCount] = useState(0);
+  const totalChars = text.length;
+
+  useEffect(() => {
+    if (count >= totalChars) {
+      return;
+    }
+
+    const delay = count === 0 ? startDelay : speedMs;
+    const timeoutId = window.setTimeout(() => {
+      setCount((prev) => Math.min(prev + 1, totalChars));
+    }, delay);
+
+    return () => window.clearTimeout(timeoutId);
+  }, [count, totalChars, speedMs, startDelay]);
+
+  return { typedCount: count, showCaret: count < totalChars };
+}
+
+function useDelayedVisibility(delay: number) {
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const timeoutId = window.setTimeout(() => {
+      setIsVisible(true);
+    }, delay);
+
+    return () => window.clearTimeout(timeoutId);
+  }, [delay]);
+
+  return isVisible;
+}
+
 type Segment = { type: "text" | "highlight" | "underline"; value: string };
 
 export default function Home() {
@@ -32,14 +66,14 @@ export default function Home() {
       {
         type: "text",
         value:
-          "Hey! I'm Arthur, welcome to my website. I like to learn, create, travel, and cook. I am building this page to serve as a ",
+          "Hi, welcome! I am building this page to serve as a ",
       },
       { type: "highlight", value: "memory bank" },
-      { type: "text", value: " for my life and to share my " },
+      { type: "text", value: " for my life, highlighting some of the defining moments that shaped who I am today. i want to share with you a glimpse into my life through my " },
       { type: "underline", value: "journey" },
-      { type: "text", value: ", " },
+      { type: "text", value: ", my " },
       { type: "underline", value: "projects" },
-      { type: "text", value: ", and " },
+      { type: "text", value: ", and my " },
       { type: "underline", value: "art" },
       { type: "text", value: "." },
     ],
@@ -51,6 +85,76 @@ export default function Home() {
   );
   const typedCount = useTyping(totalChars, TYPING_SPEED_MS);
   const showCaret = typedCount < totalChars;
+
+  // Navigation links with typing animation
+  const navLinks = useMemo(
+    () => [
+      { text: "my journey →", href: "/journey" },
+      { text: "my projects →", href: "/projects" },
+      { text: "my art →", href: "/art" },
+    ],
+    [],
+  );
+
+  // Calculate when nav links should start (after main text finishes + small delay)
+  const navStartDelay = totalChars * TYPING_SPEED_MS + 300;
+  const navLink1 = useTypingText(navLinks[0].text, navStartDelay, TYPING_SPEED_MS);
+  const navLink2 = useTypingText(navLinks[1].text, navStartDelay + navLinks[0].text.length * TYPING_SPEED_MS + 200, TYPING_SPEED_MS);
+  const navLink3 = useTypingText(navLinks[2].text, navStartDelay + (navLinks[0].text.length + navLinks[1].text.length) * TYPING_SPEED_MS + 400, TYPING_SPEED_MS);
+
+  // Social links - show them sequentially after nav links
+  const socialLinks = useMemo(
+    () => [
+      {
+        href: "https://www.linkedin.com/in/arthurhuang001/",
+        ariaLabel: "LinkedIn",
+        svg: (
+          <path d="M4.98 3.5A2.5 2.5 0 1 0 5 8.5a2.5 2.5 0 0 0-.02-5ZM3 9h4v12H3zm7 0h3.8v1.7h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1V21h-4v-5.3c0-1.27-.02-2.9-1.77-2.9-1.78 0-2.05 1.38-2.05 2.8V21H10z" />
+        ),
+      },
+      {
+        href: "https://x.com/a31zh",
+        ariaLabel: "X",
+        svg: (
+          <path d="M18.3 2H21l-6.6 7.6L22 22h-6.2l-4.9-6.4L5.3 22H2.6l7.1-8.2L2 2h6.3l4.4 5.8Zm-1.1 18h1.7L7.9 4h-1.8z" />
+        ),
+      },
+      {
+        href: "https://startupsignals.substack.com?utm_campaign=profile_chips",
+        ariaLabel: "Substack",
+        svg: (
+          <path d="M22.539 8.242H1.46V5.406h21.08v2.836zM1.46 10.812V24L12 18.11 22.54 24V10.812H1.46zM22.54 0H1.46v2.836h21.08V0z" />
+        ),
+      },
+      {
+        href: "mailto:arthur.huang@queensu.ca",
+        ariaLabel: "Email",
+        svg: (
+          <path d="M4 5h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2Zm0 2v.2l8 5 8-5V7H4Zm16 10V9.3l-7.5 4.7a1 1 0 0 1-1 0L4 9.3V17h16Z" />
+        ),
+      },
+    ],
+    [],
+  );
+
+  const totalNavChars = navLinks.reduce((sum, link) => sum + link.text.length, 0);
+  const socialStartDelay = navStartDelay + totalNavChars * TYPING_SPEED_MS + navLinks.length * 200 + 300;
+  const social1 = useDelayedVisibility(socialStartDelay);
+  const social2 = useDelayedVisibility(socialStartDelay + 150);
+  const social3 = useDelayedVisibility(socialStartDelay + 300);
+  const social4 = useDelayedVisibility(socialStartDelay + 450);
+
+  const renderNavLink = (text: string, typedCount: number, showCaret: boolean) => {
+    return (
+      <span className="relative inline-block">
+        <span className="invisible">{text}</span>
+        <span className="absolute inset-0">
+          {text.slice(0, typedCount)}
+          {showCaret ? <span className="text-orange-400">|</span> : null}
+        </span>
+      </span>
+    );
+  };
 
   const renderSegments = (visibleCount: number, highlightClassName?: string) => {
     let remaining = visibleCount;
@@ -86,7 +190,7 @@ export default function Home() {
   };
 
   return (
-    <main className="max-w-2xl mx-auto px-6 py-32 min-h-screen flex flex-col justify-center bg-white text-black">
+    <main className="max-w-2xl mx-auto px-6 py-32 min-h-screen flex flex-col justify-center bg-transparent text-current">
       <h1 className="text-4xl font-semibold">Arthur Huang</h1>
       <p className="mt-6 text-lg leading-8">
         <span className="relative block">
@@ -100,63 +204,95 @@ export default function Home() {
         </span>
       </p>
       <nav className="mt-10 flex flex-col gap-2">
-        <Link href="/journey" className="group w-fit">
-          <Highlight className="highlight-hover [&_.highlight-decor]:opacity-0 group-hover:[&_.highlight-decor]:opacity-100">
-            my journey →
-          </Highlight>
-        </Link>
-        <Link href="/projects" className="group w-fit">
-          <Highlight className="highlight-hover [&_.highlight-decor]:opacity-0 group-hover:[&_.highlight-decor]:opacity-100">
-            my projects →
-          </Highlight>
-        </Link>
-        <Link href="/art" className="group w-fit">
-          <Highlight className="highlight-hover [&_.highlight-decor]:opacity-0 group-hover:[&_.highlight-decor]:opacity-100">
-            my art →
-          </Highlight>
-        </Link>
+        {navLink1.typedCount > 0 && (
+          <Link href={navLinks[0].href} className="group w-fit">
+            <Highlight className="highlight-hover [&_.highlight-decor]:opacity-0 group-hover:[&_.highlight-decor]:opacity-100">
+              {renderNavLink(navLinks[0].text, navLink1.typedCount, navLink1.showCaret)}
+            </Highlight>
+          </Link>
+        )}
+        {navLink2.typedCount > 0 && (
+          <Link href={navLinks[1].href} className="group w-fit">
+            <Highlight className="highlight-hover [&_.highlight-decor]:opacity-0 group-hover:[&_.highlight-decor]:opacity-100">
+              {renderNavLink(navLinks[1].text, navLink2.typedCount, navLink2.showCaret)}
+            </Highlight>
+          </Link>
+        )}
+        {navLink3.typedCount > 0 && (
+          <Link href={navLinks[2].href} className="group w-fit">
+            <Highlight className="highlight-hover [&_.highlight-decor]:opacity-0 group-hover:[&_.highlight-decor]:opacity-100">
+              {renderNavLink(navLinks[2].text, navLink3.typedCount, navLink3.showCaret)}
+            </Highlight>
+          </Link>
+        )}
       </nav>
       <div className="mt-6 flex items-center gap-4">
-        <a
-          href="https://www.linkedin.com/in/arthurhuang001/"
-          aria-label="LinkedIn"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <svg
-            viewBox="0 0 24 24"
-            className="h-5 w-5"
-            fill="currentColor"
-            aria-hidden="true"
+        {social1 && (
+          <a
+            href={socialLinks[0].href}
+            aria-label={socialLinks[0].ariaLabel}
+            target="_blank"
+            rel="noopener noreferrer"
           >
-            <path d="M4.98 3.5A2.5 2.5 0 1 0 5 8.5a2.5 2.5 0 0 0-.02-5ZM3 9h4v12H3zm7 0h3.8v1.7h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1V21h-4v-5.3c0-1.27-.02-2.9-1.77-2.9-1.78 0-2.05 1.38-2.05 2.8V21H10z" />
-          </svg>
-        </a>
-        <a
-          href="https://x.com/a31zh"
-          aria-label="X"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <svg
-            viewBox="0 0 24 24"
-            className="h-5 w-5"
-            fill="currentColor"
-            aria-hidden="true"
+            <svg
+              viewBox="0 0 24 24"
+              className="h-5 w-5"
+              fill="currentColor"
+              aria-hidden="true"
+            >
+              {socialLinks[0].svg}
+            </svg>
+          </a>
+        )}
+        {social2 && (
+          <a
+            href={socialLinks[1].href}
+            aria-label={socialLinks[1].ariaLabel}
+            target="_blank"
+            rel="noopener noreferrer"
           >
-            <path d="M18.3 2H21l-6.6 7.6L22 22h-6.2l-4.9-6.4L5.3 22H2.6l7.1-8.2L2 2h6.3l4.4 5.8Zm-1.1 18h1.7L7.9 4h-1.8z" />
-          </svg>
-        </a>
-        <a href="mailto:arthur.huang@queensu.ca" aria-label="Email">
-          <svg
-            viewBox="0 0 24 24"
-            className="h-5 w-5"
-            fill="currentColor"
-            aria-hidden="true"
+            <svg
+              viewBox="0 0 24 24"
+              className="h-5 w-5"
+              fill="currentColor"
+              aria-hidden="true"
+            >
+              {socialLinks[1].svg}
+            </svg>
+          </a>
+        )}
+        {social3 && (
+          <a
+            href={socialLinks[2].href}
+            aria-label={socialLinks[2].ariaLabel}
           >
-            <path d="M4 5h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2Zm0 2v.2l8 5 8-5V7H4Zm16 10V9.3l-7.5 4.7a1 1 0 0 1-1 0L4 9.3V17h16Z" />
-          </svg>
-        </a>
+            <svg
+              viewBox="0 0 24 24"
+              className="h-5 w-5"
+              fill="currentColor"
+              aria-hidden="true"
+            >
+              {socialLinks[2].svg}
+            </svg>
+          </a>
+        )}
+        {social4 && (
+          <a
+            href={socialLinks[3].href}
+            aria-label={socialLinks[3].ariaLabel}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <svg
+              viewBox="0 0 24 24"
+              className="h-5 w-5"
+              fill="currentColor"
+              aria-hidden="true"
+            >
+              {socialLinks[3].svg}
+            </svg>
+          </a>
+        )}
       </div>
     </main>
   );

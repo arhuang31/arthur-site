@@ -1,8 +1,8 @@
 @import "tailwindcss";
 
 :root {
-  --background: #f2e8d5;
-  --foreground: #171717;
+  --background: #000000;
+  --foreground: #ffffff;
 }
 
 @theme inline {
@@ -14,8 +14,8 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #000000;
+    --foreground: #ffffff;
   }
 }
 
@@ -73,4 +73,16 @@ h3 {
   to {
     stroke-dashoffset: 0;
   }
+}
+
+/* Scoped scrollbar hiding for journey page navigation */
+.journey-nav-scrollable {
+  overflow-y: auto;
+  max-height: calc(100vh - 12rem);
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+.journey-nav-scrollable::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
 }
