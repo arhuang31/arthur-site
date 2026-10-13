@@ -27,7 +27,7 @@ const journeyData: JourneySection[] = [
         with forward deployed engineers. Trying my best to turn pretty powerpoints into actual products
       </>
     ),
-    imageSrc: "/photos/01_mck.png",
+    imageSrc: "/photos/v2/01_mck.jpg",
   },
   {
     number: "02",
@@ -49,14 +49,14 @@ const journeyData: JourneySection[] = [
         . Sometimes i also write about tech and social trends
       </>
     ),
-    imageSrc: "/photos/02_substack.png",
+    imageSrc: "/photos/v2/02_substack.jpg",
   },
   {
     number: "03",
     title: "Learning How to Cook @ GBC",
     paragraph:
       "Pursuing my interest and learning the fundamentals of cooking during the weekends. Back to being a beginner",
-    imageSrc: "/photos/03_gbc.png",
+    imageSrc: "/photos/v2/03_gbc.jpg",
   },
   {
     number: "04",
@@ -70,7 +70,7 @@ const journeyData: JourneySection[] = [
         . Mostly focused on finance and tech, with an occasional dose of philosophy. Had a lot of fun and met lifelong friends
       </>
     ),
-    imageSrc: "/photos/04_qu2.png",
+    imageSrc: "/photos/v2/04_queens.jpg",
   },
   {
     number: "05",
@@ -84,7 +84,7 @@ const journeyData: JourneySection[] = [
         15,000 km across the US with my best friends in a minivan (Bertha), experienced a proper euro summer, and worked as a bartender while solo backpacking South America for 3 months
       </>
     ),
-    imageSrc: "/photos/05_trip.png",
+    imageSrc: "/photos/v2/05_trip.jpg",
   },
   {
     number: "06",
@@ -98,7 +98,7 @@ const journeyData: JourneySection[] = [
         . Led due diligence and invested in 10+ early-stage blockchain-enabled companies. Learned how to build and validate theses
       </>
     ),
-    imageSrc: "/photos/06_r13.png",
+    imageSrc: "/photos/v2/06_r13.jpg",
   },
   {
     number: "07",
@@ -112,7 +112,7 @@ const journeyData: JourneySection[] = [
         's mission to provide cybersecurity to SMEs
       </>
     ),
-    imageSrc: "/photos/07_ge.png",
+    imageSrc: "/photos/v2/07_propelr.jpg",
   },
   {
     number: "08",
@@ -130,7 +130,7 @@ const journeyData: JourneySection[] = [
         . Published thoughts on startups and tech trends
       </>
     ),
-    imageSrc: "/photos/08_contrary.png",
+    imageSrc: "/photos/v2/08_contrary.jpg",
   },
   {
     number: "09",
@@ -144,7 +144,7 @@ const journeyData: JourneySection[] = [
         focused on blockchain education. Built teams, scaled org, hosted conferences, and raised capital. Learned about leadership through failings and iterations
       </>
     ),
-    imageSrc: "/photos/09_tbl.png",
+    imageSrc: "/photos/v2/09_tbl.jpg",
   },
   {
     number: "10",
@@ -158,35 +158,35 @@ const journeyData: JourneySection[] = [
         by the tiny city-state
       </>
     ),
-    imageSrc: "/photos/10_sg.png",
+    imageSrc: "/photos/v2/10_sg.jpg",
   },
   {
     number: "11",
     title: "Grew up in Shanghai and Halifax",
     paragraph:
       "Spent the first 11 years of my life in China (primarily Shanghai) before moving to Halifax, Canada. The drastically different environments shaped how i think about ambition and identity",
-    imageSrc: "/photos/11_growing_up.png",
+    imageSrc: "/photos/v2/11_growing_up.jpg",
   },
   {
     number: "12",
     title: "Put people first",
     paragraph:
       "Surround myself with a group of mutually inspiring people. Love each other",
-    imageSrc: "/photos/12_people.png",
+    imageSrc: "/photos/v2/12_people.jpg",
   },
   {
     number: "13",
     title: "Create something that matters",
     paragraph:
       "Build, deliver, and scale impact against meaningful problems",
-    imageSrc: "/photos/13_create.png",
+    imageSrc: "/photos/v2/13_create.jpg",
   },
   {
     number: "14",
     title: "Live with no regrets",
     paragraph:
       "Keep adding new chapters and stories. Experience new things. Stay unfinished",
-    imageSrc: "/photos/14_life.png",
+    imageSrc: "/photos/v2/14_life.jpg",
   },
 ];
 

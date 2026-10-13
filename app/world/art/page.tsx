@@ -393,11 +393,9 @@ export default function ArtPage() {
   };
 
   return (
-    <main className="mx-auto w-full px-6 py-20">
-      <h1 className="text-2xl font-semibold">Art</h1>
-
+    <main className="mx-auto w-full px-6 pb-20">
       {/* Category Filter */}
-      <div className="mt-6 flex flex-wrap items-center gap-4">
+      <div className="mt-8 flex flex-wrap items-center gap-4">
         {categories.map((category) => (
           <button
             key={category}

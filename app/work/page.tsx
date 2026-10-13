@@ -19,45 +19,52 @@ export default function ProjectsPage() {
   const writingStartup = useMemo<Block[]>(
     () => [
       {
+        id: "startup-delphi",
+        title: "delphi",
+        tags: [],
+        logoUrl: "/logos/delphi.png",
+        href: "https://startupsignals.substack.com/p/delphi-can-you-package-a-mind",
+      },
+      {
         id: "startup-beli",
         title: "beli",
         tags: [],
-        logoUrl: "/logos/Beli App Logo & Brand Assets (SVG, PNG and vector) - Brandfetch.png",
+        logoUrl: "/logos/beli.png",
         href: "https://startupsignals.substack.com/p/beli-your-food-diary-and-dining-advisor",
       },
       {
         id: "startup-strava",
         title: "strava",
         tags: [],
-        logoUrl: "/logos/Strava Vector Logo - Download Free SVG ....png",
+        logoUrl: "/logos/strava.png",
         href: "https://startupsignals.substack.com/p/strava-if-its-not-on-strava-it-didnt",
       },
       {
         id: "startup-kalshi",
         title: "kalshi",
         tags: [],
-        logoUrl: "/logos/Kalshi Logo & Brand Assets (SVG, PNG and vector) - Brandfetch.jpeg",
+        logoUrl: "/logos/kalshi.jpeg",
         href: "https://startupsignals.substack.com/p/kalshi-the-winner-of-the-2024-election",
       },
       {
         id: "startup-substack",
         title: "substack",
         tags: [],
-        logoUrl: "/logos/Substack - A new economic engine for culture.png",
+        logoUrl: "/logos/substack.png",
         href: "https://startupsignals.substack.com/p/substack-make-reading-cool-again",
       },
       {
         id: "startup-notion",
         title: "notion",
         tags: [],
-        logoUrl: "/logos/File:Notion app logo.png - Wikimedia Commons.png",
+        logoUrl: "/logos/notion.png",
         href: "https://startupsignals.substack.com/p/notion-why-customizability-may-be-the-winning-advantage-in-productivtiy",
       },
       {
         id: "startup-alltrails",
         title: "alltrails",
         tags: [],
-        logoUrl: "/logos/AllTrails Logo & Brand Assets (SVG, PNG and vector) - Brandfetch.jpeg",
+        logoUrl: "/logos/alltrails.jpeg",
         href: "https://startupsignals.substack.com/p/alltrails-getting-people-outdoors",
       },
       {
@@ -71,7 +78,7 @@ export default function ProjectsPage() {
         id: "startup-perplexity",
         title: "perplexity",
         tags: [],
-        logoUrl: "/logos/Perplexity Ai Icon SVG Vector & PNG Free Download | UXWing.webp",
+        logoUrl: "/logos/perplexity.webp",
         href: "https://startupsignals.substack.com/p/perplexity-how-ai-is-challenging-googles-monopoly-on-search",
       },
     ],
@@ -80,6 +87,13 @@ export default function ProjectsPage() {
 
   const writingOther = useMemo<Block[]>(
     () => [
+      {
+        id: "writing-canada",
+        title: "canadian exceptionalism",
+        tags: [],
+        logoUrl: "/logos/canada.png",
+        href: "https://startupsignals.substack.com/p/canadian-exceptionalism",
+      },
       {
         id: "writing-1",
         title: "blockchain and inequality",
@@ -197,7 +211,7 @@ export default function ProjectsPage() {
 
   return (
     <main className="mx-auto max-w-5xl px-6 py-20">
-      <h1 className="text-2xl font-semibold">Projects</h1>
+      <h1 className="text-2xl font-semibold">Work</h1>
       <div className="mt-6 flex flex-wrap gap-4 text-sm uppercase tracking-wide">
         {(["Writing", "products"] as Section[]).map((section) => (
           <div key={section} className="relative inline-flex items-start">

@@ -72,9 +72,11 @@ export default function Home() {
       { type: "text", value: " for my life, highlighting some of the defining moments that shaped who I am today. i want to share with you a glimpse into my life through my " },
       { type: "underline", value: "journey" },
       { type: "text", value: ", my " },
-      { type: "underline", value: "projects" },
+      { type: "underline", value: "work" },
+      { type: "text", value: ", my " },
+      { type: "underline", value: "mind" },
       { type: "text", value: ", and my " },
-      { type: "underline", value: "art" },
+      { type: "underline", value: "world" },
       { type: "text", value: "." },
     ],
     [],
@@ -90,17 +92,24 @@ export default function Home() {
   const navLinks = useMemo(
     () => [
       { text: "my journey →", href: "/journey" },
-      { text: "my projects →", href: "/projects" },
-      { text: "my art →", href: "/art" },
+      { text: "my work →", href: "/work" },
+      { text: "my mind →", href: "/mind/readings" },
+      { text: "my world →", href: "/world/travels" },
     ],
     [],
   );
 
   // Calculate when nav links should start (after main text finishes + small delay)
   const navStartDelay = totalChars * TYPING_SPEED_MS + 300;
-  const navLink1 = useTypingText(navLinks[0].text, navStartDelay, TYPING_SPEED_MS);
-  const navLink2 = useTypingText(navLinks[1].text, navStartDelay + navLinks[0].text.length * TYPING_SPEED_MS + 200, TYPING_SPEED_MS);
-  const navLink3 = useTypingText(navLinks[2].text, navStartDelay + (navLinks[0].text.length + navLinks[1].text.length) * TYPING_SPEED_MS + 400, TYPING_SPEED_MS);
+  const navDelay = (index: number) =>
+    navStartDelay +
+    navLinks.slice(0, index).reduce((sum, link) => sum + link.text.length, 0) * TYPING_SPEED_MS +
+    index * 200;
+  const navLink1 = useTypingText(navLinks[0].text, navDelay(0), TYPING_SPEED_MS);
+  const navLink2 = useTypingText(navLinks[1].text, navDelay(1), TYPING_SPEED_MS);
+  const navLink3 = useTypingText(navLinks[2].text, navDelay(2), TYPING_SPEED_MS);
+  const navLink4 = useTypingText(navLinks[3].text, navDelay(3), TYPING_SPEED_MS);
+  const navTyping = [navLink1, navLink2, navLink3, navLink4];
 
   // Social links - show them sequentially after nav links
   const socialLinks = useMemo(
@@ -204,26 +213,14 @@ export default function Home() {
         </span>
       </p>
       <nav className="mt-10 flex flex-col gap-2">
-        {navLink1.typedCount > 0 && (
-          <Link href={navLinks[0].href} className="group w-fit">
-            <Highlight className="highlight-hover [&_.highlight-decor]:opacity-0 group-hover:[&_.highlight-decor]:opacity-100">
-              {renderNavLink(navLinks[0].text, navLink1.typedCount, navLink1.showCaret)}
-            </Highlight>
-          </Link>
-        )}
-        {navLink2.typedCount > 0 && (
-          <Link href={navLinks[1].href} className="group w-fit">
-            <Highlight className="highlight-hover [&_.highlight-decor]:opacity-0 group-hover:[&_.highlight-decor]:opacity-100">
-              {renderNavLink(navLinks[1].text, navLink2.typedCount, navLink2.showCaret)}
-            </Highlight>
-          </Link>
-        )}
-        {navLink3.typedCount > 0 && (
-          <Link href={navLinks[2].href} className="group w-fit">
-            <Highlight className="highlight-hover [&_.highlight-decor]:opacity-0 group-hover:[&_.highlight-decor]:opacity-100">
-              {renderNavLink(navLinks[2].text, navLink3.typedCount, navLink3.showCaret)}
-            </Highlight>
-          </Link>
+        {navLinks.map((link, index) =>
+          navTyping[index].typedCount > 0 ? (
+            <Link key={link.href} href={link.href} className="group w-fit">
+              <Highlight className="highlight-hover [&_.highlight-decor]:opacity-0 group-hover:[&_.highlight-decor]:opacity-100">
+                {renderNavLink(link.text, navTyping[index].typedCount, navTyping[index].showCaret)}
+              </Highlight>
+            </Link>
+          ) : null,
         )}
       </nav>
       <div className="mt-6 flex items-center gap-4">

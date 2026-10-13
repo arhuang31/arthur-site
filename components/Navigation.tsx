@@ -6,9 +6,10 @@ import { usePathname } from "next/navigation";
 
 const navLinks = [
   { href: "/", label: "home" },
-  { href: "/journey", label: "my journey" },
-  { href: "/projects", label: "my projects" },
-  { href: "/art", label: "my art" },
+  { href: "/journey", label: "my journey", section: "/journey" },
+  { href: "/work", label: "my work", section: "/work" },
+  { href: "/mind/readings", label: "my mind", section: "/mind" },
+  { href: "/world/travels", label: "my world", section: "/world" },
 ];
 
 export default function Navigation() {
@@ -89,7 +90,9 @@ export default function Navigation() {
           {/* Navigation links */}
           <nav className="flex flex-col space-y-4">
             {navLinks.map((link) => {
-              const isActive = pathname === link.href;
+              const isActive = link.section
+                ? pathname.startsWith(link.section)
+                : pathname === link.href;
               return (
                 <Link
                   key={link.href}
