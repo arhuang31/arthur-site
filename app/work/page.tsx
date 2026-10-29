@@ -81,6 +81,13 @@ export default function ProjectsPage() {
         logoUrl: "/logos/perplexity.webp",
         href: "https://startupsignals.substack.com/p/perplexity-how-ai-is-challenging-googles-monopoly-on-search",
       },
+      {
+        id: "startup-ambrook",
+        title: "ambrook",
+        tags: [],
+        logoUrl: "/logos/ambrook.png",
+        href: "https://research.contrary.com/company/ambrook",
+      },
     ],
     [],
   );

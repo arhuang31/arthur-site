@@ -42,7 +42,7 @@ const journeyData: JourneySection[] = [
         <a href="https://startupsignals.substack.com/p/strava-if-its-not-on-strava-it-didnt" target="_blank" rel="noopener noreferrer" className="underline underline-offset-2 hover:opacity-70">
           Strava
         </a>
-        ,{" "}
+        , and{" "}
         <a href="https://startupsignals.substack.com/p/kalshi-the-winner-of-the-2024-election" target="_blank" rel="noopener noreferrer" className="underline underline-offset-2 hover:opacity-70">
           Kalshi
         </a>
@@ -63,9 +63,9 @@ const journeyData: JourneySection[] = [
     title: "Graduated BCom @ Queen's University",
     paragraph: (
       <>
-        graduated first-gen student at queens commerce on a{" "}
+        graduated as a first-gen student from queen's commerce on a{" "}
         <a href="https://smith.queensu.ca/sobey/index.php" target="_blank" rel="noopener noreferrer" className="underline underline-offset-2 hover:opacity-70">
-          full-ride
+          full ride
         </a>
         . Mostly focused on finance and tech, with an occasional dose of philosophy. Had a lot of fun and met lifelong friends
       </>
@@ -91,7 +91,7 @@ const journeyData: JourneySection[] = [
     title: "Invested @ Round13 Capital",
     paragraph: (
       <>
-        hired as first non-partner investor for R13's{" "}
+        hired as the first non-partner investor for R13's{" "}
         <a href="https://r13daf.com" target="_blank" rel="noopener noreferrer" className="underline underline-offset-2 hover:opacity-70">
           digital asset fund
         </a>
@@ -141,7 +141,7 @@ const journeyData: JourneySection[] = [
         <a href="https://www.linkedin.com/company/tblcapital/?viewAsMember=true" target="_blank" rel="noopener noreferrer" className="underline underline-offset-2 hover:opacity-70">
           student organization
         </a>{" "}
-        focused on blockchain education. Built teams, scaled org, hosted conferences, and raised capital. Learned about leadership through failings and iterations
+        focused on blockchain education. Built teams, scaled the org, hosted conferences, and raised capital. Learned about leadership through failures and iterations
       </>
     ),
     imageSrc: "/photos/v2/09_tbl.jpg",
