@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 import Highlight from "../components/Highlight";
 
-const TYPING_SPEED_MS = 20;
+const TYPING_SPEED_MS = 31;
 
 function useTyping(totalChars: number, speedMs: number) {
   const [count, setCount] = useState(0);
@@ -100,11 +100,11 @@ export default function Home() {
   );
 
   // Calculate when nav links should start (after main text finishes + small delay)
-  const navStartDelay = totalChars * TYPING_SPEED_MS + 150;
+  const navStartDelay = totalChars * TYPING_SPEED_MS + 234;
   const navDelay = (index: number) =>
     navStartDelay +
     navLinks.slice(0, index).reduce((sum, link) => sum + link.text.length, 0) * TYPING_SPEED_MS +
-    index * 100;
+    index * 156;
   const navLink1 = useTypingText(navLinks[0].text, navDelay(0), TYPING_SPEED_MS);
   const navLink2 = useTypingText(navLinks[1].text, navDelay(1), TYPING_SPEED_MS);
   const navLink3 = useTypingText(navLinks[2].text, navDelay(2), TYPING_SPEED_MS);
@@ -147,11 +147,11 @@ export default function Home() {
   );
 
   const totalNavChars = navLinks.reduce((sum, link) => sum + link.text.length, 0);
-  const socialStartDelay = navStartDelay + totalNavChars * TYPING_SPEED_MS + navLinks.length * 100 + 150;
+  const socialStartDelay = navStartDelay + totalNavChars * TYPING_SPEED_MS + navLinks.length * 156 + 234;
   const social1 = useDelayedVisibility(socialStartDelay);
-  const social2 = useDelayedVisibility(socialStartDelay + 80);
-  const social3 = useDelayedVisibility(socialStartDelay + 160);
-  const social4 = useDelayedVisibility(socialStartDelay + 240);
+  const social2 = useDelayedVisibility(socialStartDelay + 125);
+  const social3 = useDelayedVisibility(socialStartDelay + 250);
+  const social4 = useDelayedVisibility(socialStartDelay + 375);
 
   const renderNavLink = (text: string, typedCount: number, showCaret: boolean) => {
     return (

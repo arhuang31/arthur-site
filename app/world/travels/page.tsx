@@ -33,7 +33,8 @@ function buildMap(): MapCountry[] {
       d: path(f) ?? "",
       cx,
       cy,
-      visit: visit ? { highlight: visit.highlight, learning: visit.learning } : undefined,
+      label: visit?.label,
+      visit: visit ? { highlight: visit.highlight } : undefined,
     };
   });
 
@@ -44,11 +45,12 @@ function buildMap(): MapCountry[] {
       const [x, y] = projection(v.marker!) ?? [0, 0];
       return {
         name: v.country,
+        label: v.label,
         d: "",
         cx: x,
         cy: y,
         isMarker: true,
-        visit: { highlight: v.highlight, learning: v.learning },
+        visit: { highlight: v.highlight },
       };
     });
 

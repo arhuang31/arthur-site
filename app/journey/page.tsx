@@ -224,6 +224,7 @@ export default function JourneyPage() {
   ];
 
   const activeSection = journeyData[activeIndex];
+  const isLastSection = activeIndex === journeyData.length - 1;
 
   // Handle click - scroll item into view and update active index
   const handleItemClick = (index: number) => {
@@ -408,6 +409,15 @@ export default function JourneyPage() {
                 ></div>
               </div>
             )}
+          </div>
+
+          <div className="mt-6 flex w-full justify-end">
+            <button
+              onClick={() => handleItemClick(isLastSection ? 0 : activeIndex + 1)}
+              className="font-mono text-base text-current/60 transition-colors hover:text-current"
+            >
+              {isLastSection ? "start over →" : "next →"}
+            </button>
           </div>
         </div>
       </div>

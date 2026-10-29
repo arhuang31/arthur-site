@@ -4,11 +4,12 @@ import { useState } from "react";
 
 export type MapCountry = {
   name: string;
+  label?: string;
   d: string;
   cx: number;
   cy: number;
   isMarker?: boolean;
-  visit?: { highlight: string; learning: string };
+  visit?: { highlight?: string };
 };
 
 type Props = { countries: MapCountry[]; width: number; height: number };
@@ -16,7 +17,9 @@ type Props = { countries: MapCountry[]; width: number; height: number };
 export default function WorldMap({ countries, width, height }: Props) {
   const [active, setActive] = useState<string | null>(null);
 
-  const visited = countries.filter((c) => c.visit);
+  const visited = countries
+    .filter((c) => c.visit)
+    .sort((a, b) => (a.label ?? a.name).localeCompare(b.label ?? b.name));
   const activeCountry = visited.find((c) => c.name === active);
   return (
     <div className="mt-8">
@@ -105,15 +108,8 @@ export default function WorldMap({ countries, width, height }: Props) {
               })`,
             }}
           >
-            <h3 className="text-base font-semibold">{activeCountry.name}</h3>
-            <p className="mt-2">
-              <span className="text-current/50">highlight — </span>
-              {activeCountry.visit.highlight}
-            </p>
-            <p className="mt-1">
-              <span className="text-current/50">learning — </span>
-              {activeCountry.visit.learning}
-            </p>
+            <h3 className="text-base font-semibold">{activeCountry.label ?? activeCountry.name}</h3>
+            {activeCountry.visit.highlight ? <p className="mt-2">{activeCountry.visit.highlight}</p> : null}
           </div>
         ) : null}
       </div>
@@ -130,7 +126,7 @@ export default function WorldMap({ countries, width, height }: Props) {
                 c.name === active ? "text-current underline underline-offset-4" : "text-current/50 hover:text-current"
               }`}
             >
-              {c.name}
+              {c.label ?? c.name}
             </button>
           </li>
         ))}

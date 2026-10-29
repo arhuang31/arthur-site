@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import { currentlyReading, readBooks, type Book } from "../../../data/bookshelf";
+import { currentlyReading, readBooks, wantToRead, type Book } from "../../../data/bookshelf";
 import { topBooks } from "../../../data/readings";
 
 const GOODREADS_PROFILE = "https://www.goodreads.com/user/show/173790713-arthur-huang";
@@ -65,14 +65,9 @@ export default function ReadingsPage() {
                     <p className="mt-1 text-sm text-current/60">{book.author}</p>
                   </div>
                 </a>
-                <ul className="mt-4 space-y-2 text-sm leading-6">
-                  {book.takeaways.map((takeaway) => (
-                    <li key={takeaway} className="flex gap-2">
-                      <span className="text-current/40">–</span>
-                      <span>{takeaway}</span>
-                    </li>
-                  ))}
-                </ul>
+                <blockquote className="mt-4 border-l border-current/20 pl-4 text-sm italic leading-6 text-current/80">
+                  “{book.quote}”
+                </blockquote>
               </li>
             );
           })}
@@ -110,6 +105,23 @@ export default function ReadingsPage() {
           ))}
         </ul>
       </section>
+
+      {wantToRead.length ? (
+        <section className="mt-16">
+          <h2 className="text-xl font-semibold">Want to read</h2>
+          <ul className="mt-6 grid grid-cols-3 gap-x-4 gap-y-8 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 xl:grid-cols-10">
+            {wantToRead.map((book) => (
+              <li key={book.id} className="group">
+                <a href={bookUrl(book.id)} target="_blank" rel="noopener noreferrer" className="block">
+                  <Cover src={book.cover} alt={book.title} className="aspect-[2/3] w-full" />
+                  <h3 className="mt-2 text-sm font-semibold leading-snug">{book.title}</h3>
+                  <p className="mt-1 text-xs text-current/60">{book.author}</p>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </section>
+      ) : null}
     </main>
   );
 }
