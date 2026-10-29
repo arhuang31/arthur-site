@@ -411,7 +411,14 @@ export default function JourneyPage() {
             )}
           </div>
 
-          <div className="mt-6 flex w-full justify-end">
+          <div className="mt-6 flex w-full justify-between">
+            <button
+              onClick={() => handleItemClick(activeIndex - 1)}
+              disabled={activeIndex === 0}
+              className="font-mono text-base text-current/60 transition-colors hover:text-current disabled:invisible"
+            >
+              ← previous
+            </button>
             <button
               onClick={() => handleItemClick(isLastSection ? 0 : activeIndex + 1)}
               className="font-mono text-base text-current/60 transition-colors hover:text-current"

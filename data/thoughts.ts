@@ -5,17 +5,10 @@ export type Thought = {
   title: string;
   body: string;
   theme: Theme;
-  /** 1–10: how much a reasonable person would push back. The scale view sorts by this. */
+  /** 1–10: how much a reasonable person would push back. Sets the position across the map. */
   controversy: number;
-  /** 1–10: how sure I am — 10 means I'd bet on it. */
+  /** 1–10: how sure I am — 10 means I would bet on it. Sets the height on the map. */
   conviction: number;
-};
-
-export const themes: Record<Theme, string> = {
-  life: "on life",
-  work: "on work",
-  growth: "on growing",
-  society: "on people & the world",
 };
 
 export const thoughts: Thought[] = [
