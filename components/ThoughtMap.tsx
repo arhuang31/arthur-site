@@ -9,9 +9,9 @@ const toPercent = (score: number) => 5 + ((score - 1) / 9) * 90;
 
 const quadrants = [
   { label: "hills i'd die on", className: "right-3 top-3 text-right" },
-  { label: "obvious, but i live by them", className: "left-3 top-3" },
+  { label: "guiding principles", className: "left-3 top-3" },
   { label: "still figuring out", className: "bottom-3 left-3" },
-  { label: "half-baked hot takes", className: "bottom-3 right-3 text-right" },
+  { label: "strong opinions, weakly held", className: "bottom-3 right-3 text-right" },
 ];
 
 export default function ThoughtMap({ thoughts }: { thoughts: Thought[] }) {
@@ -23,7 +23,7 @@ export default function ThoughtMap({ thoughts }: { thoughts: Thought[] }) {
       <div className="flex gap-3">
         {/* Y axis label */}
         <div className="flex w-5 shrink-0 items-center justify-center">
-          <span className="-rotate-90 whitespace-nowrap text-sm text-current/50">how sure i am →</span>
+          <span className="-rotate-90 whitespace-nowrap text-sm text-current/50">degree of certainty →</span>
         </div>
 
         <div className="flex-1">
@@ -67,7 +67,7 @@ export default function ThoughtMap({ thoughts }: { thoughts: Thought[] }) {
               );
             })}
           </div>
-          <div className="mt-2 text-right text-sm text-current/50">how controversial it is →</div>
+          <div className="mt-2 text-right text-sm text-current/50">degree of controversy →</div>
         </div>
       </div>
 

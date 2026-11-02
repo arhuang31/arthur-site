@@ -7,7 +7,7 @@ export type Thought = {
   theme: Theme;
   /** 1–10: how much a reasonable person would push back. Sets the position across the map. */
   controversy: number;
-  /** 1–10: how sure I am — 10 means I would bet on it. Sets the height on the map. */
+  /** 1–10: degree of certainty — 10 means I would bet on it. Sets the height on the map. */
   conviction: number;
 };
 
